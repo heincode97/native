@@ -1,0 +1,303 @@
+/* =========================================================
+   BUTTON VARIATIONS
+========================================================= */
+
+$button-variants: (
+  "primary": (
+    "bg": #ec281c,
+    "text": #ffffff,
+    "border": #ec281c,
+    "hover-bg": unquote(
+        "linear-gradient(0deg, rgba(15, 23, 42, 0.12), rgba(15, 23, 42, 0.12)), #EC281C"
+      ),
+    "hover-text": #ffffff,
+    "hover-border": transparent,
+    "active-bg": unquote(
+        "linear-gradient(0deg, rgba(15, 23, 42, 0.2), rgba(15, 23, 42, 0.2)), #EC281C"
+      ),
+    "active-text": #ffffff,
+    "active-border": transparent,
+  ),
+  "primary-underline": (
+    "bg": transparent,
+    "text": #db2519,
+    "border": transparent,
+    "hover-bg": transparent,
+    "hover-text": #0f172a,
+    "hover-border": transparent,
+    "active-bg": transparent,
+    "active-text": #0f172a,
+    "active-border": transparent,
+  ),
+  "primary-outline": (
+    "bg": transparent,
+    "text": #0f172a,
+    "border": #d5d5d5,
+    "hover-bg": transparent,
+    "hover-text": #ec281c,
+    "hover-border": transparent,
+    "active-bg": transparent,
+    "active-text": #ec281c,
+    "active-border": transparent,
+  ),
+);
+
+/* =========================================================
+   BUTTON SIZES
+========================================================= */
+
+$button-sizes: (
+  "default": (
+    "padding": 14px 24px,
+    "font-size": 16px,
+    "height": 48px,
+    "width": max-content
+  ),
+
+  "underline": (
+    "padding": 3px 0px,
+    "font-size": 16px,
+    "width": max-content
+  ),
+
+  "outline": (
+    "padding": 4px 0px,
+    "font-size": 16px,
+    "height": auto,
+    "width": max-content
+  ),
+);
+
+/* =========================================================
+   MIXINS
+========================================================= */
+
+@mixin button-size($size) {
+  $config: map-get($button-sizes, $size);
+
+  padding: map-get($config, "padding");
+  font-size: map-get($config, "font-size");
+  min-height: map-get($config, "height");
+
+  @if map-has-key($config, "width") {
+    width: map-get($config, "width");
+  }
+}
+
+@mixin button-variant($variant) {
+  $config: map-get($button-variants, $variant);
+
+  background-color: map-get($config, "bg");
+  color: map-get($config, "text");
+  border: 1px solid map-get($config, "border");
+
+  &:hover {
+    background: map-get($config, "hover-bg");
+    color: map-get($config, "hover-text");
+    border-color: map-get($config, "hover-border");
+  }
+
+  &:focus,
+  &:active {
+    background: map-get($config, "active-bg");
+    color: map-get($config, "active-text");
+    border-color: map-get($config, "active-border");
+  }
+}
+
+/* =========================================================
+   BASE BUTTON
+========================================================= */
+.button,
+.cta-button,
+.elementor-widget-button .elementor-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  position: relative;
+  /* overflow: hidden; <-- Removed to prevent text/arrow cutoff */
+  text-decoration: none !important;
+  text-align: center;
+
+  font-family: $font-primary;
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: 0;
+
+  border-radius: 7px;
+  cursor: pointer;
+
+  transition: all 0.3s ease;
+  box-shadow: none;
+
+  &:focus {
+    outline: none;
+  }
+
+  &:disabled,
+  &.disabled {
+    background: #e0e0e0 !important;
+    border-color: #e0e0e0 !important;
+    color: #777 !important;
+    pointer-events: none;
+    cursor: not-allowed;
+  }
+
+  @media (max-width: 768px) {
+    display: block;
+    width: 100%;
+  }
+}
+
+/* =========================================================
+   APPLY GLOBAL DEFAULTS
+========================================================= */
+
+.button,
+.cta-button,
+.elementor-widget-button .elementor-button {
+  @include button-size("default");
+  @include button-variant("primary");
+}
+
+@media (max-width: 767.98px) {
+  .elementor-widget-button,
+  .elementor-widget-button .elementor-widget-container,
+  .elementor-widget-button .elementor-button {
+    display: block;
+    width: 100%;
+  }
+}
+
+/* =========================================================
+   SPECIFIC BUTTON MODIFIERS
+========================================================= */
+
+.button {
+  &--primary {
+    @include button-size("default");
+    @include button-variant("primary");
+
+    /* Regular speed when mouse leaves */
+    transition: all 0.8s ease;
+
+    &:hover {
+      transition: all 1s ease;
+      background-color: #d31d12;
+      background-image: none;
+    }
+
+    span {
+      transition: inherit;
+    }
+
+    &.has-icon {
+      &::after {
+        content: "";
+        display: inline-block;
+        width: 18px;
+        height: 18px;
+        background: url("/app/uploads/2026/09/pajamas_long-arrow-2.svg")
+          center / contain no-repeat;
+        vertical-align: middle;
+      }
+    }
+  }
+  &--primary-arrow {
+    @include button-size("default");
+    @include button-variant("primary");
+
+    /* Regular speed when mouse leaves */
+    transition: all 0.8s ease;
+
+    &:hover {
+      transition: all 1s ease;
+      background-color: #d31d12;
+      background-image: none;
+    }
+
+    span {
+      transition: inherit;
+    }
+
+    &::after {
+      content: "";
+      display: inline-block;
+      width: 16px;
+      height: 9px;
+      background: url("/app/uploads/2026/09/whtie-arrow-vector.svg") center /
+        contain no-repeat;
+      vertical-align: middle;
+    }
+  }
+  &--primary-underline {
+    @include button-size("underline");
+    @include button-variant("primary-underline");
+
+    border-radius: 0;
+    gap: 10px;
+    border: none;
+
+    border-bottom: 1px solid transparent;
+    padding-bottom: 6px;
+
+    transition: all 0.3s ease;
+
+    &:hover {
+      border-bottom-color: #db2519;
+      color: #db2519 !important;
+    }
+
+    span {
+      transition: inherit;
+    }
+
+    &::after {
+      content: "";
+      display: inline-block;
+      width: 14px;
+      height: 14px;
+      -webkit-mask-image: url("/app/uploads/2026/09/button-vector.svg");
+      mask-image: url("/app/uploads/2026/09/button-vector.svg");
+      -webkit-mask-size: contain;
+      mask-size: contain;
+      -webkit-mask-repeat: no-repeat;
+      mask-repeat: no-repeat;
+      -webkit-mask-position: center;
+      mask-position: center;
+
+      /* The icon uses currentColor, so it will automatically turn primary red on hover along with the text */
+      background-color: currentColor;
+      transition: background-color 0.3s ease;
+    }
+  }
+
+  /* Primary Outline (Full width border underline under text and arrow on hover) */
+  &--primary-outline {
+    @include button-size("outline");
+    @include button-variant("primary-outline");
+
+    border-radius: 20px;
+    gap: 8px;
+    padding: 7px 18px;
+    border: 1px solid #d5d5d5;
+    color: #0f172a;
+
+    transition: all 0.5s ease;
+
+    &:hover {
+      border: 1px solid #d5d5d5;
+      color: #ec281c;
+    }
+
+    // White text version
+    &.text-white {
+      color: #ffffff;
+
+      &:hover {
+        color: #ffffff;
+      }
+    }
+  }
+}

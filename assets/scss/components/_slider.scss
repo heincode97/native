@@ -1,0 +1,314 @@
+//Home Slider
+.main-slider {
+  position: relative;
+
+  // ==========================================
+  // 1. CONTENT LAYOUT (1320px Box & Left Align)
+  // ==========================================
+  &.main-slider .elementor-slides-wrapper {
+    position: relative;
+    width: 100%;
+
+    .swiper-wrapper {
+      .swiper-slide-inner {
+        width: 100%;
+        max-width: 1200px;
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        box-sizing: border-box;
+        padding: 0px;
+
+        .swiper-slide-contents {
+          width: 100%;
+          text-align: left;
+          display: flex;
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 20px;
+
+          .elementor-slide-heading {
+            font-size: 46px;
+            color: $color_white;
+            line-height: 54px;
+            margin-bottom: 24px;
+          }
+
+          .elementor-slide-description {
+            font-size: 18px;
+            color: #FFFFFFE5;
+            line-height: 1.6;
+            margin-bottom: 40px;
+          }
+
+          .elementor-slide-button {
+            padding: 14px 20px;
+            font-size: 14px;
+            font-weight: $fw_semibold;
+            background: $color_primary;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+
+            &:hover {
+              background: $color_btn_primary_hover;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  // ==========================================
+  // 2. ARROWS OVERRIDE — custom SVG images & box styles
+  // ==========================================
+
+  // Left Arrow Parent Box
+  &.main-slider .swiper .elementor-swiper-button-prev,
+  &.main-slider .swiper~.elementor-swiper-button-prev,
+  &.main-slider .elementor-lightbox .swiper .elementor-swiper-button-prev,
+  &.main-slider .elementor-lightbox .swiper~.elementor-swiper-button-prev {
+    width: 50px;
+    height: 50px;
+    left: 250px;
+    top: 50%; // Replaces fixed 362px for better responsiveness
+    transform: translateY(-50%) rotate(0deg);
+    opacity: 1;
+    gap: 10px;
+    border-radius: 5px;
+    padding: 9px;
+    background: #FFFFFF33; // Transparent white background
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+
+    i,
+    svg {
+      display: none;
+    }
+
+    &::before {
+      content: '';
+      display: block;
+      width: 100%;
+      height: 100%;
+      background-image: url('../icons/white-left.svg');
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: contain;
+    }
+  }
+
+  // Right Arrow Parent Box
+  &.main-slider .swiper .elementor-swiper-button-next,
+  &.main-slider .swiper~.elementor-swiper-button-next,
+  &.main-slider .elementor-lightbox .swiper .elementor-swiper-button-next,
+  &.main-slider .elementor-lightbox .swiper~.elementor-swiper-button-next {
+    width: 50px;
+    height: 50px;
+    right: 250px; // Better than fixed left: 1355px for cross-device consistency
+    top: 50%; // Replaces fixed 362px
+    transform: translateY(-50%) rotate(0deg);
+    opacity: 1;
+    gap: 10px;
+    border-radius: 5px;
+    padding: 9px;
+    background: #FFFFFF33; // Transparent white background
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+
+    i,
+    svg {
+      display: none;
+    }
+
+    &::before {
+      content: '';
+      display: block;
+      width: 100%;
+      height: 100%;
+      background-image: url('../icons/white-right.svg');
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: contain;
+    }
+  }
+
+  // ==========================================
+  // 3. RESPONSIVE OVERRIDES
+  // ==========================================
+
+  @media (max-width: 1880px) {
+
+    &.main-slider .swiper .elementor-swiper-button-prev,
+    &.main-slider .swiper~.elementor-swiper-button-prev {
+      left: calc(50% - 660px - 50px);
+    }
+
+    &.main-slider .swiper .elementor-swiper-button-next,
+    &.main-slider .swiper~.elementor-swiper-button-next {
+      right: calc(50% - 660px - 50px);
+    }
+  }
+
+  @media (max-width: 1400px) {
+    &.main-slider .elementor-slides-wrapper .swiper-wrapper .swiper-slide-inner {
+      max-width: 100%;
+      padding: 0 120px;
+
+      .swiper-slide-contents {
+        .elementor-slide-heading {
+          font-size: 52px;
+        }
+      }
+    }
+
+    &.main-slider .swiper .elementor-swiper-button-prev,
+    &.main-slider .swiper~.elementor-swiper-button-prev {
+      left: 40px;
+      width: 44px;
+      height: 44px;
+      top: 50%;
+    }
+
+    &.main-slider .swiper .elementor-swiper-button-next,
+    &.main-slider .swiper~.elementor-swiper-button-next {
+      right: 40px;
+      width: 44px;
+      height: 44px;
+      top: 50%;
+    }
+  }
+
+      @media (max-width: 1024px) {
+
+    &.main-slider .swiper .elementor-swiper-button-prev,
+    &.main-slider .swiper~.elementor-swiper-button-prev {
+      left: 20px;
+    }
+
+    &.main-slider .swiper .elementor-swiper-button-next,
+    &.main-slider .swiper~.elementor-swiper-button-next {
+      right: 20px;
+    }
+  }
+
+  @media (max-width: 991px) {
+    &.main-slider .elementor-slides-wrapper .swiper-wrapper .swiper-slide-inner {
+      max-width: 100%;
+      padding: 0 80px;
+
+      .swiper-slide-contents {
+        .elementor-slide-heading {
+          font-size: 38px;
+          margin-bottom: 16px;
+        }
+
+        .elementor-slide-description {
+          font-size: 15px;
+          margin-bottom: 28px;
+        }
+      }
+    }
+
+    &.main-slider .swiper .elementor-swiper-button-prev,
+    &.main-slider .swiper~.elementor-swiper-button-prev {
+      left: 20px;
+      width: 40px;
+      height: 40px;
+    }
+
+    &.main-slider .swiper .elementor-swiper-button-next,
+    &.main-slider .swiper~.elementor-swiper-button-next {
+      right: 20px;
+      width: 40px;
+      height: 40px;
+    }
+  }
+
+  @media (max-width: 767px) {
+    &.main-slider .swiper .elementor-swiper-button-prev,
+    &.main-slider .swiper~.elementor-swiper-button-prev {
+      left: 20px;   // was 15px
+      width: 36px;
+      height: 36px;
+    }
+
+    &.main-slider .swiper .elementor-swiper-button-next,
+    &.main-slider .swiper~.elementor-swiper-button-next {
+      right: 20px;  // was 15px
+      width: 36px;
+      height: 36px;
+    }
+
+    &.main-slider .swiper .elementor-swiper-button-prev,
+    &.main-slider .swiper~.elementor-swiper-button-prev {
+      left: 20px !important;
+      width: 36px;
+      height: 36px;
+    }
+
+    &.main-slider .swiper .elementor-swiper-button-next,
+    &.main-slider .swiper~.elementor-swiper-button-next {
+      right: 20px !important;
+      width: 36px;
+      height: 36px;
+    }
+  }
+
+
+
+  @media (max-width: 575px) {
+        &.main-slider .swiper .elementor-swiper-button-prev,
+    &.main-slider .swiper~.elementor-swiper-button-prev {
+      left: 20px;      // was 10px
+      width: 32px;
+      height: 32px;
+    }
+
+    &.main-slider .swiper .elementor-swiper-button-next,
+    &.main-slider .swiper~.elementor-swiper-button-next {
+      right: 20px;     // was 10px
+      width: 32px;
+      height: 32px;
+    }
+  }
+
+
+  
+  @media (max-width: 400px) {
+    &.main-slider .elementor-slides-wrapper .swiper-wrapper .swiper-slide-inner {
+      padding: 0 45px;
+
+      .swiper-slide-contents {
+        .elementor-slide-heading {
+          padding: 0 20px;
+          font-size: 19px;
+        }
+
+        .elementor-slide-description {
+          font-size: 12px;
+        }
+      }
+    }
+
+        &.main-slider .swiper .elementor-swiper-button-prev,
+    &.main-slider .swiper~.elementor-swiper-button-prev {
+      left: 20px;      // was 6px
+      width: 26px;
+      height: 26px;
+    }
+
+    &.main-slider .swiper .elementor-swiper-button-next,
+    &.main-slider .swiper~.elementor-swiper-button-next {
+      right: 20px;     // was 6px
+      width: 26px;
+      height: 26px;
+    }
+  }
+}

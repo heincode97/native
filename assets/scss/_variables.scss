@@ -1,0 +1,72 @@
+// =========================
+// COLORS
+// =========================
+$color_primary: #EC281C;
+$color_secondary: #0f172a;
+$color_dark: #000000;
+$color_white: #ffffff;
+$color_text: #4f4f4f;
+$color_gray: #d5d5d5;
+$color_btn_primary_hover: #c8102e;
+
+$color_accent: #ffffff99;
+$color_teal: #e6e6e6;
+$color_transparent: transparent;
+$border_white: #ffffff;
+$number-color: #DB2519;
+// =========================
+// FONTS
+// =========================
+$font_primary: "Plus Jakarta Sans", sans-serif;
+
+// Font weights
+$fw_normal: 400;
+$fw_semibold: 600;
+$fw_bold: 700;
+
+$text-xs: 12px;
+$text-sm: 14px;
+$text-base: 16px;
+$text-lg: 18px;
+$text-xl: 20px;
+
+$container-max-width: 1280px;
+$container-10col-max-width: 1072px;
+$container-gutter: 20px;
+$container-gutter-tablet: 15px;
+
+
+
+// ============================================================
+// Header Variables
+// ============================================================
+$header_height: 93px;
+$header_height_scrolled: 70px;
+$header_height_mobile: 68px;
+$header_height_mobile_scrolled: 56px;
+$logo_width: 260px;
+$logo_height: 70px;
+$logo_width_scrolled: 240px;
+$logo_height_scrolled: 60px;
+$nav_gap: 20px;
+$container_max: 1200px;
+$header_padding_x: 20px;
+$header_padding_mobile: 20px;
+
+$header_glass_bg: rgba(#ffffff, 0.2);                      // #FFFFFF33
+$header_glass_blur: 20px;
+$header_glass_shadow: 0 3px 30px 0 rgba(#000000, 0.15);    // #000000 @ 15%
+$header_glass_radius: 10px;
+
+$nav_item_min_width: 69px;
+$nav_item_height: 30px;
+$nav_item_gap: 5px;
+$nav_item_border_width: 2px;
+$nav_item_padding_y: 5px;
+$nav_item_padding_x: 14px;
+$dropdown_shadow: 0px 15px 10px 0px #D3C0D612;
+
+$fa_family: "Font Awesome 7 Free";
+$fa_chevron_down: "\f078";
+
+$sn_breakpoint: 991px;

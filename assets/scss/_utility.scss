@@ -1,0 +1,189 @@
+// layout and utilities
+@mixin flex-center {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+}
+
+@mixin smooth-transition($props: (all)) {
+	transition-property: $props;
+	transition-duration: $transition-duration;
+	transition-timing-function: $transition-timing;
+}
+
+@mixin focus-visible-ring {
+	outline: none;
+
+	&:focus-visible {
+		outline: 2px solid $color-primary;
+		outline-offset: 3px;
+	}
+}
+
+a {
+	img {
+		&.aligncenter {
+			display: block;
+			margin-left: auto;
+			margin-right: auto;
+		}
+
+		&.alignnone {
+			margin: 5px 20px 20px 0;
+		}
+
+		&.alignright {
+			float: right;
+			margin: 5px 0 20px 20px;
+		}
+
+		&.alignleft {
+			float: left;
+			margin: 5px 20px 20px 0;
+		}
+	}
+}
+
+// ========================================
+// SPACING CONFIG
+// ========================================
+
+/** PADDING UTILITY **/
+$padding-spacing: (
+	sm: 24px,
+	md: 40px,
+	lg: 56px,
+	xl: 80px,
+	xxl: 180px,
+	mobile: 40px,
+);
+
+// Fixed horizontal padding
+$horizontal-padding: 20px;
+
+// Mobile Breakpoint
+@mixin mobile {
+	@media (max-width: 767px) {
+		@content;
+	}
+}
+
+/*** MIXINS ***/
+
+// All side padding
+// Top/Bottom = dynamic
+// Left/Right = fixed 20px
+@mixin padding($desktop, $mobile: md) {
+	padding: map-get($padding-spacing, $desktop) $horizontal-padding;
+
+	@include mobile {
+		padding: map-get($padding-spacing, $mobile) $horizontal-padding;
+	}
+}
+
+// Vertical padding only
+@mixin padding-vertical($desktop, $mobile: mobile) {
+	padding-top: map-get($padding-spacing, $desktop);
+	padding-bottom: map-get($padding-spacing, $desktop);
+
+	@include mobile {
+		padding-top: map-get($padding-spacing, $mobile);
+		padding-bottom: map-get($padding-spacing, $mobile);
+	}
+}
+
+// Bottom padding only
+@mixin padding-bottom($desktop, $mobile: mobile) {
+	padding-bottom: map-get($padding-spacing, $desktop);
+
+	@include mobile {
+		padding-bottom: map-get($padding-spacing, $mobile);
+	}
+}
+
+body {
+
+	// All side padding classes
+	.p {
+		&-sm {
+			@include padding(sm);
+		}
+
+		&-md {
+			@include padding(md);
+		}
+
+		&-lg {
+			@include padding(lg);
+		}
+
+		&-xl {
+			@include padding(xl);
+		}
+
+		&-xxl {
+			@include padding(xxl);
+		}
+	}
+
+	// Vertical padding classes
+	.pd {
+		&-sm {
+			@include padding-vertical(sm);
+		}
+
+		&-md {
+			@include padding-vertical(md);
+		}
+
+		&-lg {
+			@include padding-vertical(lg);
+		}
+
+		&-xl {
+			@include padding-vertical(xl);
+		}
+
+		&-xxl {
+			@include padding-vertical(xxl);
+		}
+	}
+
+	// Bottom padding classes
+	.pb {
+		&-sm {
+			@include padding-bottom(sm);
+		}
+
+		&-md {
+			@include padding-bottom(md);
+		}
+
+		&-lg {
+			@include padding-bottom(lg);
+		}
+
+		&-xl {
+			@include padding-bottom(xl);
+		}
+
+		&-xxl {
+			@include padding-bottom(xxl);
+		}
+	}
+}
+
+.nt-badge p {
+	font-family: $font_primary;
+	font-weight: 600;
+	display: inline-block;
+	padding: 5px 20px;
+	color: $color_white;
+	border: 1px solid $color_gray;
+	border-radius: 20px;
+}
+
+.nt-badge--dark p {
+	color: $color_secondary;
+	border-color: $color_gray;
+}

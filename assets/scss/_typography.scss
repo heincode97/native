@@ -1,0 +1,222 @@
+@import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap");
+
+@mixin heading($color: $color_secondary,
+  $font-family: $font_primary,
+  $font-size,
+  $letter-spacing: 0,
+  $line-height: 100%,   
+  $font-weight: 700,
+  $size: null) {
+  color: $color;
+  font-family: $font-family;
+  font-size: $font-size;
+  font-style: normal;
+  font-weight: $font-weight;
+  line-height: $line-height;
+  letter-spacing: $letter-spacing;
+  padding: 0;
+  margin: 0 0 20px;
+  word-break: break-word;
+
+  @if $size =="xxl" {
+    @media (max-width: 767px) {
+      font-size: 32px;
+    }
+  }
+
+  @else if $size =="xl" {
+    @media (max-width: 767px) {
+      font-size: 32px;
+    }
+  }
+
+  @else if $size =="lg" {
+    @media (max-width: 767px) {
+      font-size: 32px;
+    }
+  }
+
+  @else if $size =="md" {
+    @media (max-width: 767px) {
+      font-size: 24px;
+    }
+  }
+
+  @else if $size =="sm" {
+    @media (max-width: 767px) {
+      font-size: 20px;
+    }
+  }
+
+  @else if $size =="xs" {
+    @media (max-width: 767px) {
+      font-size: 18px;
+    }
+  }
+}
+
+h1 {
+  @include heading($font-size: 68px, $size: "xl");
+}
+
+h2 {
+  @include heading($font-size: 46px, $size: "lg");
+}
+
+h3 {
+  @include heading($font-size: 36px, $size: "md");
+}
+
+h4 {
+  @include heading($font-size: 24px, $font-weight: 600, $size: "sm");
+}
+
+h5 {
+  @include heading($font-size: 20px,
+    $font-weight: 600,
+    $font-family: $font_primary,
+    $size: "xs"
+  );
+}
+
+h6 {
+  @include heading($font-size: 16px,
+    $font-weight: 600,
+    $font-family: $font_primary );
+
+  text-transform: uppercase;
+}
+
+.heading-xs {
+  @include heading($font-size: 14px);
+}
+
+.heading-sm {
+  @include heading($font-size: 20px);
+}
+
+.heading-normal {
+  @include heading($font-size: 28px);
+}
+
+.heading-md {
+  @include heading($font-size: 32px);
+}
+
+.heading-lg {
+  @include heading($font-size: 40px);
+}
+
+.heading-xl {
+  @include heading($font-size: 68px);
+}
+
+.heading-74 {
+  @include heading($font-size: 74px);
+}
+
+.heading-xxl {
+  @include heading($font-size: 108px);
+}
+
+.head-xxl {
+  @include heading($font-size: 74px);
+}
+
+// TEXT STYLES
+// TEXT STYLES
+@mixin text($font-family: $font_primary,
+  $font-size,
+  $line-height: normal,
+  $font-weight: 400,
+  $size: null) {
+  font-family: $font-family;
+  font-size: $font-size;
+  line-height: $line-height;
+  font-weight: $font-weight;
+  margin: 0;
+
+  @if $size =="lg" {
+    @media (max-width: 767px) {
+      font-size: 18px;
+    }
+  }
+
+  @else if $size =="md" {
+    @media (max-width: 767px) {
+      font-size: 16px;
+    }
+  }
+
+  @else if $size =="sm" {
+    @media (max-width: 767px) {
+      font-size: 14px;
+    }
+  }
+
+  @else if $size =="xs" {
+    @media (max-width: 767px) {
+      font-size: 12px;
+    }
+  }
+
+  @else if $size =="base" {
+    @media (max-width: 767px) {
+      font-size: $font-size;
+    }
+  }
+
+  @else {
+    @media (max-width: 767px) {
+      font-size: $font-size * 0.875;
+    }
+  }
+}
+
+p {
+  @include text($font-size: $text-base, $line-height: 24px, $size: "base");
+}
+
+/* White Text Utility */
+
+.white {
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  p,
+  a,
+  li,
+  .elementor-heading-title,
+  .elementor-widget-container {
+    color: #fff;
+  }
+
+  a {
+    &:hover {
+      color: #fff;
+    }
+  }
+}
+
+h2 span {
+  color: #EC281C;
+}
+
+
+// Elementor heading widget
+// .elementor-widget-heading .elementor-heading-title {
+//   line-height: 54px;
+// }
+
+// Elementor Text Editor widget (uses Elementor's global "Text" font)
+.elementor-widget-text-editor,
+.elementor-widget-text-editor p,
+.elementor-widget-text-editor li {
+  font-family: var(--e-global-typography-text-font-family), $font_primary;
+  font-weight: var(--e-global-typography-text-font-weight, 400);
+  line-height: 24px;
+}

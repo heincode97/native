@@ -1,0 +1,70 @@
+@mixin make-container($max-width: $container-max-width,
+  $gutter: $container-gutter) {
+  width: 100%;
+  max-width: $max-width;
+  margin-inline: auto;
+  padding-inline: $gutter;
+}
+
+// 10-column grid container mixin (1072px max-width)
+@mixin make-container-10col($gutter: $container-gutter) {
+  @include make-container($container-10col-max-width, $gutter);
+}
+
+// container classes
+.container,
+.custom-container,
+.dk-container {
+  @include make-container;
+}
+
+// 10-column narrow grid container
+.dk-container--narrow,
+.dk-container--10col {
+  @include make-container-10col;
+}
+
+.elementor-page main {
+  padding-inline: 0;
+}
+
+
+
+.e-con.e-parent>.e-con-inner,
+.e-con-boxed.e-grid>.e-con-inner,
+.elementor-section.elementor-section-boxed>.elementor-container {
+  box-sizing: border-box;
+  padding-inline: $container-gutter;
+}
+
+
+@media (max-width: 991px) {
+  .container,
+  .custom-container,
+  .dk-container .e-con.e-parent>.e-con-inner,
+  .elementor-section.elementor-section-boxed>.elementor-container {
+    padding-inline: 15px;
+  }
+}
+.e-con.e-parent {
+  padding-block: 40px;
+
+  &.main-slider {
+    padding-block: unset;
+    margin-bottom: 40px;
+  }
+}
+
+.slider-container{
+  padding-block: 0 !important; 
+}
+
+.business-section .e-con.e-parent {
+  padding-block: 0;
+}
+
+.employment-card.e-con.e-parent {
+  padding-block: 0;
+}
+
+ 

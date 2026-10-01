@@ -1,0 +1,666 @@
+.slide-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 1.5rem;
+
+  .e-con-full {
+    display: flex;
+    flex-direction: column;
+    gap: .75rem;
+  }
+
+  .button--primary-outline {
+    display: inline-flex;
+    align-items: center;
+    align-self: flex-start;
+    padding: .6rem 1.4rem;
+    font-size: .875rem;
+    font-weight: 600;
+    line-height: 1;
+    color: #1a1a1a;
+    text-decoration: none;
+    background: transparent;
+    border: 1.5px solid currentColor;
+    border-radius: 999px;
+    transition: background-color .25s ease, color .25s ease;
+
+    &:hover,
+    &:focus-visible {
+      color: #fff;
+      background-color: #1a1a1a;
+      outline: none;
+    }
+  }
+
+  .elementor-heading-title {
+    margin: 0;
+    font-size: clamp(1.5rem, 2.5vw, 2.25rem);
+    font-weight: 700;
+    line-height: 1.2;
+    color: #1a1a1a;
+  }
+
+  .elementor-widget-text-editor p {
+    margin: 0;
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #4a4a4a;
+  }
+
+  // ---------- Carousel ----------
+  .col-3-slider {
+    position: relative;
+    width: 100%;
+  }
+
+  .elementor-image-carousel-wrapper {
+    position: relative;
+    overflow: hidden;
+    padding-bottom: 4.5rem;
+
+    // Responsive adjustment for arrow spacing
+    @media (max-width: 767px) {
+      padding-bottom: 4rem;
+    }
+  }
+
+  // ---------- Arrows ----------
+  .col-3-slider .elementor-swiper-button {
+    position: absolute !important;
+    bottom: 0 !important;
+    top: auto !important;
+    left: auto;
+    z-index: 30;
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
+    width: 2.75rem;
+    height: 2.75rem;
+    padding: 0;
+    margin: 0 !important;
+    order: 999 !important;
+    transform: none !important;
+    cursor: pointer;
+    border: 1px solid #cfcfcf;
+    border-radius: 6px;
+    transition: background-color .25s ease;
+
+    &:hover,
+    &:focus-visible {
+      background-color: $color-primary;
+      outline: none;
+
+      img {
+        filter: invert(1);
+      }
+    }
+
+    img {
+      display: block;
+      width: 1rem;
+      height: 1rem;
+      object-fit: contain;
+      transition: filter .25s ease;
+    }
+
+    &.elementor-swiper-button-prev {
+      left: 0 !important;
+    }
+
+    &.elementor-swiper-button-next {
+      left: 3.25rem !important;
+    }
+
+    // Responsive arrows for mobile
+    @media (max-width: 480px) {
+      width: 2.5rem;
+      height: 2.5rem;
+
+      &.elementor-swiper-button-next {
+        left: 3rem !important;
+      }
+    }
+  }
+
+  &.no-slide .elementor-swiper-button {
+    display: none !important;
+  }
+
+  // ---------- Card style ----------
+  .swiper-slide {
+    height: auto !important;
+
+    figure {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+      margin: 0;
+      padding: 1.75rem 1.25rem;
+      text-align: center;
+      background: #fff;
+      border: 1px solid #e5e5e5;
+      border-radius: 12px;
+      transition: transform .3s ease, box-shadow .3s ease;
+
+      &:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 8px 24px rgba(0, 0, 0, .08);
+      }
+
+      // Responsive padding for smaller cards
+      @media (max-width: 767px) {
+        padding: 1.25rem 1rem;
+      }
+
+      @media (max-width: 380px) {
+        padding: 1rem 0.75rem;
+      }
+    }
+
+    img.swiper-slide-image {
+      display: block;
+      width: 100%;
+      max-width: 130px;
+      height: auto;
+      margin: 0 auto 1rem;
+      object-fit: contain;
+
+      // Make image slightly smaller on mobile
+      @media (max-width: 480px) {
+        max-width: 100px;
+      }
+    }
+
+    figcaption {
+      font-size: .875rem;
+      line-height: 1.5;
+      color: #4a4a4a;
+    }
+  }
+}
+
+// Global rule for disabled buttons
+.elementor-element .swiper .elementor-swiper-button.swiper-button-disabled,
+.elementor-element .swiper~.elementor-swiper-button.swiper-button-disabled,
+.elementor-lightbox .swiper .elementor-swiper-button.swiper-button-disabled,
+.elementor-lightbox .swiper~.elementor-swiper-button.swiper-button-disabled {
+  opacity: 1 !important;
+}
+
+.business-section {
+  h3 {
+    color: $color_white;
+  }
+
+  .business-card {
+    padding: 12px 12px 30px;
+
+    img {
+      border-radius: 10px;
+    }
+
+    &__content {
+      padding-left: 15px;
+      padding-right: 15px;
+    }
+
+    &__list ul {
+      padding: 0;
+      margin: 0;
+
+      li {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        list-style: none;
+        &:not(:last-child) {
+          margin-bottom: 5px;
+        }
+
+        &::before {
+          content: "";
+          display: inline-block;
+          width: 20px;
+          height: 20px;
+          background-image: url("../icons/check.svg");
+          background-repeat: no-repeat;
+        }
+      }
+    }
+  }
+}
+
+.numers-iconbox.e-con {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    counter-reset: step-counter;
+    row-gap: 60px;
+    column-gap: 0;
+
+    > .elementor-widget-icon-box.numbers-ppt {
+        margin: 0;
+        position: relative;
+        counter-increment: step-counter;
+        text-align: center;
+
+        &::before {
+            content: counter(step-counter, decimal-leading-zero);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 70px;
+            height: 70px;
+            background: #FFFFFF;
+            border-radius: 50%;
+            margin: 0 auto 20px auto;
+            position: relative;
+            z-index: 2;
+
+            font-family: $font-primary, 'Plus Jakarta Sans', sans-serif;
+            font-weight: 600;
+            font-size: 20px;
+            line-height: 24px;
+            color: #EC281C;
+        }
+
+        &::after {
+            content: '';
+            position: absolute;
+            top: 35px;
+            left: 50%;
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(90deg, #FFFFFF 0%, rgba(255, 255, 255, 0.2) 100%);
+            z-index: 1;
+            display: block;
+        }
+
+        .elementor-icon-box-description {
+            font-family: $font-primary, 'Plus Jakarta Sans', sans-serif;
+            text-align: center;
+            font-weight: 600;
+            font-size: 18px;
+            line-height: 1.2;
+            color: #FFFFFF;
+            margin: 0;
+        }
+    }
+
+    // Desktop: >= 992px — 5 columns per row
+    @media (min-width: 992px) {
+        > .elementor-widget-icon-box.numbers-ppt {
+            flex: 0 0 20%;
+            max-width: 20%;
+            padding: 0 15px;
+
+            &:nth-child(5n)::after,
+            &:last-child::after {
+                display: none;
+            }
+        }
+    }
+
+    // Tablet: 768px – 991px — 3 columns per row
+    @media (min-width: 768px) and (max-width: 991px) {
+        > .elementor-widget-icon-box.numbers-ppt {
+            flex: 0 0 33.333%;
+            max-width: 33.333%;
+            padding: 0 15px;
+            margin-bottom: 40px;
+
+            &:nth-child(3n)::after,
+            &:last-child::after {
+                display: none;
+            }
+        }
+    }
+
+    // Mobile: 481px – 767px — 2 columns per row
+    @media (min-width: 481px) and (max-width: 767px) {
+        row-gap: 30px;
+
+        > .elementor-widget-icon-box.numbers-ppt {
+            flex: 0 0 50%;
+            max-width: 50%;
+            padding: 0 10px;
+            margin-bottom: 30px;
+
+            &:nth-child(2n)::after,
+            &:last-child::after {
+                display: none;
+            }
+        }
+    }
+
+    // Small mobile: <= 480px — 1 column per row, no connecting lines needed
+    @media (max-width: 480px) {
+        row-gap: 40px;
+
+        > .elementor-widget-icon-box.numbers-ppt {
+            flex: 0 0 100%;
+            max-width: 100%;
+            padding: 0;
+            margin-bottom: 20px;
+
+            &::after {
+                display: none;
+            }
+        }
+    }
+
+    // Extra tuning for very small phones, same 1-column layout as above
+    @media (max-width: 380px) {
+        row-gap: 40px;
+
+        > .elementor-widget-icon-box.numbers-ppt {
+            margin-bottom: 16px;
+
+            &::before {
+                width: 60px;
+                height: 60px;
+                font-size: 18px;
+            }
+
+            .elementor-icon-box-description {
+                font-size: 16px;
+            }
+        }
+    }
+}
+
+.projects-section {
+
+    .container {
+        padding: 0;
+    }
+
+    .row {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: stretch; // both columns match the tallest one's height
+        margin: 0;
+        gap: 20px;
+    }
+
+    // ===== Left Tabs (40%) =====
+    .col-lg-5 {
+        flex: 0 0 calc(40% - 10px);
+        max-width: calc(40% - 10px);
+        order: 1;
+        padding: 0;
+        gap: 18px;
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+
+        .project-tabs {
+            flex: 1; // tabs take up remaining space
+        }
+
+        .button {
+            margin-top: auto; // button pinned to the true bottom, always
+            align-self: flex-start;
+        }
+    }
+
+    // ===== Right Content (60%) =====
+    .col-lg-7 {
+        flex: 0 0 calc(60% - 10px);
+        max-width: calc(60% - 10px);
+        order: 2;
+        padding: 0;
+        height: 100%;
+
+        .project-content {
+            height: 100%;
+        }
+
+        .tab-pane {
+            height: 100%;
+
+            &.fade {
+                opacity: 1;
+                transition: none;
+            }
+
+            &:not(.show) {
+                display: none;
+            }
+
+            &.show {
+                display: block;
+            }
+        }
+    }
+
+    .project-tabs {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .project-tab {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 20px;
+        border: 1px solid #E6E6E6;
+        border-radius: 12px;
+        background: #F8FAFC;
+        text-align: left;
+        transition: border-color 0.25s ease, background 0.25s ease;
+
+        &:hover,
+        &.active {
+            border-color: #EC281C;
+        }
+
+        &.active {
+            background: #fff;
+        }
+
+        &:hover,
+        &.active {
+            .project-icon {
+                background: #EC281C;
+
+                img {
+                    filter: brightness(0) invert(1);
+                }
+            }
+        }
+    }
+
+    .project-icon {
+        width: 42px;
+        height: 42px;
+        padding: 9px;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        flex-shrink: 0;
+
+        border-radius: 50%;
+        background: #fff;
+        border: 1px solid #E6E6E6;
+
+        transition: background 0.25s ease;
+
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+
+            filter: brightness(0);
+            transition: filter 0.2s ease;
+        }
+    }
+
+    .project-info {
+        display: flex;
+        flex-direction: column;
+        gap: 3px;
+
+        small {
+            font-weight: 700;
+            font-size: 12px;
+            line-height: 16px;
+            letter-spacing: 1.2px;
+            color: #94A3B8;
+        }
+
+        strong {
+            font-weight: 600;
+            font-size: 16px;
+            line-height: 100%;
+            color: #0F172A;
+        }
+    }
+
+    .project-image {
+        position: relative;
+        overflow: hidden;
+        border-radius: 16px;
+        width: 100%;
+        height: 100%;
+
+        img {
+            width: 100%;
+            height: 100%;
+            display: block;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+
+        &::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(0deg, rgba(15, 23, 42, 0.7) 0%, rgba(15, 23, 42, 0) 60%);
+            pointer-events: none;
+        }
+
+        &:hover img {
+            transform: scale(1.03);
+        }
+    }
+
+    .project-overlay {
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+
+        padding: 32px;
+
+        background: linear-gradient(0deg,
+                rgba(15, 23, 42, 0.7) 0%,
+                rgba(15, 23, 42, 0) 60%);
+
+        .category-label {
+            display: inline-block;
+            margin-bottom: 10px;
+            padding: 4px 12px;
+
+            border-radius: 12px;
+            background: #EC281C;
+
+            font-weight: 700;
+            font-size: 12px;
+            color: #fff;
+        }
+
+        h3 {
+            margin-bottom: 8px;
+
+            font-weight: 700;
+            font-size: 20px;
+            line-height: 28px;
+            color: #fff;
+        }
+
+        p {
+            margin-bottom: 0;
+
+            font-weight: 400;
+            font-size: 14px;
+            line-height: 22.75px;
+            color: rgba(255, 255, 255, 0.8);
+        }
+    }
+
+    @media (max-width: 1199px) {
+
+        .col-lg-5,
+        .col-lg-7 {
+            flex: 0 0 100%;
+            max-width: 100%;
+            height: auto;
+        }
+
+        .col-lg-5 {
+            order: 1;
+
+            .button {
+                margin-top: 16px;
+            }
+        }
+
+        .col-lg-7 {
+            order: 2;
+
+            .project-content,
+            .tab-pane {
+                height: auto;
+            }
+        }
+
+        .project-overlay {
+            padding: 24px;
+        }
+    }
+
+    @media (max-width: 767px) {
+        .project-tab {
+            padding: 14px;
+            gap: 10px;
+        }
+
+        .project-icon {
+            width: 36px;
+            height: 36px;
+            padding: 7px;
+        }
+
+        .project-info {
+            strong {
+                font-size: 14px;
+            }
+
+            small {
+                font-size: 11px;
+            }
+        }
+
+        .project-overlay {
+            padding: 16px;
+
+            h3 {
+                font-size: 17px;
+                line-height: 24px;
+            }
+
+            p {
+                font-size: 13px;
+                line-height: 20px;
+            }
+        }
+    }
+}

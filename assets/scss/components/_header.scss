@@ -1,0 +1,1055 @@
+$nav: '.site-header .main-navigation .stellarnav';
+
+// Same nav, but only while the header is in its scrolled/sticky state.
+// (4 classes, so it beats $nav rules without !important.)
+$nav_sticky: '.site-header.is-sticky .main-navigation .stellarnav';
+
+// Navy used for dropdown links and for the menu once the page scrolls
+$color_navy: #0F172A;
+
+// ============================================================
+// Base (all viewports)
+// ============================================================
+
+.site-header {
+    position: absolute;
+    top: 0%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: calc(100% - 40px);
+    max-width: $container_max;
+    z-index: 999;
+
+    background: $header_glass_bg;
+    backdrop-filter: blur($header_glass_blur);
+    -webkit-backdrop-filter: blur($header_glass_blur);
+
+    border-radius: $header_glass_radius;
+    border-bottom: 1px solid rgba($color_dark, 0.08);
+    box-shadow: $header_glass_shadow;
+    transition: top 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+
+    .container {
+        max-width: 100%;
+        padding: 0 $header_padding_x;
+    }
+
+    // Scrolled state: solid light background so navy text is readable
+    &.is-sticky {
+        position: fixed;
+        top: 0;
+        background: rgba($color_white, 0.95);
+        box-shadow: 0 6px 24px rgba(0, 0, 0, 0.12);
+    }
+}
+
+.site-header__inner {
+    display: flex;
+    align-items: center;
+    height: $header_height;
+    position: relative;
+    gap: 20px;
+    transition: height 0.3s ease;
+}
+
+.site-header.is-sticky .site-header__inner {
+    height: $header_height_scrolled;
+}
+
+// ------------------------------------------------------------
+// Logo
+// ------------------------------------------------------------
+
+.site-logo {
+    flex-shrink: 0;
+    width: $logo_width;
+    height: $logo_height;
+    display: flex;
+    align-items: center;
+    transition: width 0.3s ease, height 0.3s ease;
+
+    a {
+        display: block;
+        line-height: 0;
+    }
+
+    img {
+        width: $logo_width;
+        height: $logo_height;
+        object-fit: contain;
+        transition: width 0.3s ease, height 0.3s ease;
+    }
+}
+
+.site-header.is-sticky .site-logo {
+    width: $logo_width_scrolled;
+    height: $logo_height_scrolled;
+
+    img {
+        width: $logo_width_scrolled;
+        height: $logo_height_scrolled;
+    }
+}
+
+// Second logo: hidden by default, swapped in when scrolled.
+// Only swaps when a second logo exists (.has-second-logo).
+.site-logo__second {
+    display: none;
+}
+
+.site-header.is-sticky .site-logo.has-second-logo {
+    .site-logo__main {
+        display: none;
+    }
+
+    .site-logo__second {
+        display: block;
+    }
+}
+
+// ------------------------------------------------------------
+// StellarNav base rules shared by desktop + mobile
+// ------------------------------------------------------------
+
+// closeBtn:false already prevents these, this is just a safety net
+#{$nav} .close-menu,
+#{$nav} .stellarnav-close {
+    display: none;
+}
+
+// Kill the plugin's CSS-triangle (it draws on a::before / a::after).
+// One rule replaces the whole old "GLOBAL ARROW KILLER" block.
+#{$nav}>ul>li.has-sub>a::before {
+    content: none;
+}
+
+// Hidden by default, shown only inside the mobile media query below
+#{$nav}>ul>li.mobile-menu-logo,
+#{$nav}>ul>li.mobile-menu-cta-item {
+    display: none;
+}
+
+// Our own submenu toggle button: hidden by default (desktop),
+// shown as a tap target in the mobile media query
+#{$nav} .submenu-toggle {
+    display: none;
+    background: none;
+    border: 0;
+    padding: 0;
+    margin: 0;
+    cursor: pointer;
+}
+
+// Header CTA (desktop)
+.mobile-menu-cta {
+    display: none;
+}
+
+.header-cta {
+    flex-shrink: 0;
+
+    a.btn--primary {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        background: $color_primary;
+        color: $color_white;
+        font-family: $font_primary;
+        font-size: 14px;
+        font-weight: $fw_semibold;
+        letter-spacing: 0;
+        text-decoration: none;
+        padding: 0 22px;
+        height: 40px;
+        border-radius: 4px;
+        border: none;
+        cursor: pointer;
+        white-space: nowrap;
+        transition: background 0.2s ease;
+
+        &:hover {
+            color: $color_white;
+            background: darken($color_primary, 8%);
+        }
+
+        &:active {
+            background: darken($color_primary, 14%);
+        }
+    }
+}
+
+// ============================================================
+// Desktop Navigation  (min-width: 992px)
+// ============================================================
+
+@media (min-width: ($sn_breakpoint + 1)) {
+
+    .main-navigation {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: $header_height;
+        transition: height 0.3s ease;
+    }
+
+    .site-header.is-sticky .main-navigation {
+        height: $header_height_scrolled;
+    }
+
+    #{$nav} {
+        padding: 0;
+        position: static;
+        width: 100%;
+        display: flex;
+        justify-content: flex-end;
+
+        >a.menu-toggle {
+            display: none;
+        }
+
+        >ul {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            background: transparent;
+            width: auto;
+
+            >li {
+                margin: 0;
+                padding: 0;
+                position: relative;
+                display: flex;
+                align-items: center;
+                height: 30px;
+                gap: 0;
+                list-style: none;
+
+                // Menu item box: same for every item, dropdown or not
+                >a {
+                    box-sizing: border-box;
+                    min-width: 69px;
+                    height: 30px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    gap: 8px;
+                    border-bottom: 2px solid transparent;
+                    padding: 5px 14px;
+
+                    font-family: $font_primary;
+                    font-size: 14px;
+                    font-weight: 600;
+                    line-height: 20px;
+                    letter-spacing: 0;
+                    color: $color_white;
+                    text-decoration: none;
+                    background: transparent;
+                    transition: color 0.2s ease;
+
+                    &:hover {
+                        color: $color_primary;
+                    }
+                }
+
+                // Font Awesome chevron INSIDE the link, 5px from label.
+                // Explicit resets neutralise the plugin's triangle on ::after.
+                &.has-sub>a::after {
+                    display: inline-flex;
+                    align-items: center;
+                    font-family: $fa_family;
+                    font-weight: 900;
+                    content: $fa_chevron_down;
+                    font-size: 13px;
+                    line-height: 1;
+                    color: $color_white;
+                    opacity: 1;
+                    pointer-events: none;
+                    transition: color 0.2s ease;
+
+                    position: static;
+                    width: auto;
+                    height: auto;
+                    margin: 0;
+                    border: 0;
+                    background: none;
+                    transform: none;
+                }
+
+                &.current_page_item>a,
+                &.current-menu-item>a,
+                &.current-menu-ancestor>a {
+                    color: $color_primary;
+                }
+
+                // Dropdown
+                >ul {
+                    display: block;
+                    position: absolute;
+                    top: 100%;
+                    left: 0;
+                    margin-top: 8px;
+                    transform: none;
+                    background: $color_white;
+                    border-radius: 5px;
+                    box-shadow: $dropdown_shadow;
+                    width: 200px;
+                    padding: 2px 0;
+                    list-style: none;
+                    z-index: 100;
+                    opacity: 0;
+                    visibility: hidden;
+                    transition: opacity 0.18s ease, visibility 0.18s ease;
+
+                    // Invisible bridge so hover isn't lost in the 8px gap
+                    &::before {
+                        content: '';
+                        position: absolute;
+                        top: -8px;
+                        left: 0;
+                        width: 100%;
+                        height: 8px;
+                    }
+
+                    li {
+                        border-bottom: 1px solid rgba($color_dark, 0.08);
+
+                        &:last-child {
+                            border-bottom: none;
+                        }
+
+                        a {
+                            display: block;
+                            padding: $nav_item_padding_x;
+                            font-family: $font_primary;
+                            font-size: 14px;
+                            font-weight: 700;
+                            line-height: 20px;
+                            letter-spacing: 0;
+                            color: $color_navy;
+                            white-space: normal;
+                            overflow-wrap: break-word;
+                            background: transparent;
+                            text-decoration: none;
+                            transition: color 0.2s ease;
+
+                            &:hover {
+                                color: $color_primary;
+                            }
+                        }
+                    }
+                }
+
+                &:hover>ul,
+                &:focus-within>ul {
+                    opacity: 1;
+                    visibility: visible;
+                }
+            }
+        }
+    }
+
+    // --------------------------------------------------------
+    // Scrolled state: every top-level item + chevron turns navy
+    // Uses $nav_sticky (4 classes) so it beats the base rules
+    // above without !important. Dropdown links are not touched
+    // here, they are already navy.
+    // --------------------------------------------------------
+    #{$nav_sticky}>ul>li {
+
+        >a {
+            color: $color_navy;
+
+            &:hover {
+                color: $color_primary;
+            }
+        }
+
+        &.has-sub>a::after {
+            color: $color_navy;
+        }
+
+        // Keep the current page highlighted in the primary color.
+        // Delete this block if you want the active item navy too.
+        &.current_page_item>a,
+        &.current-menu-item>a,
+        &.current-menu-ancestor>a {
+            color: $color_primary;
+        }
+
+        &.current_page_item.has-sub>a::after,
+        &.current-menu-item.has-sub>a::after,
+        &.current-menu-ancestor.has-sub>a::after {
+            color: $color_primary;
+        }
+    }
+}
+
+// ============================================================
+// Tablet & Mobile  (max-width: 991px)
+// ============================================================
+
+@media (max-width: $sn_breakpoint) {
+
+    .site-header {
+        top: 0;
+        left: 0;
+        transform: none;
+        width: 100%;
+        max-width: 100%;
+        border-radius: 0;
+        background: $header_glass_bg;
+
+        // An ancestor with backdrop-filter (a) becomes the containing block
+        // for the fixed drawer and (b) becomes the "backdrop root", so the
+        // drawer's own blur would only see the header, not the page.
+        // So on mobile the blur moves to a pseudo-element instead.
+        backdrop-filter: none;
+        -webkit-backdrop-filter: none;
+
+        &::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            z-index: -1;
+            border-radius: inherit;
+            backdrop-filter: blur($header_glass_blur);
+            -webkit-backdrop-filter: blur($header_glass_blur);
+            pointer-events: none;
+        }
+    }
+
+    .site-header__inner {
+        height: $header_height_mobile;
+        gap: 12px;
+        justify-content: space-between;
+    }
+
+    .site-header.is-sticky .site-header__inner {
+        height: $header_height_mobile_scrolled;
+    }
+
+    .site-logo {
+        width: 220px;
+        height: 50px;
+
+        img {
+            width: 220px;
+            height: 50px;
+        }
+    }
+
+    .site-header.is-sticky .site-logo {
+        width: 220px;
+        height: 50px;
+
+        img {
+            width: 220px;
+            height: 50px;
+        }
+    }
+
+    .header-cta {
+        display: none;
+    }
+
+    .main-navigation {
+        position: static;
+        flex: 0;
+        height: auto;
+        display: flex;
+        align-items: center;
+    }
+
+    #{$nav} {
+        background: transparent;
+        padding: 0;
+
+        // ------------------ Hamburger ------------------
+        >a.menu-toggle {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            right: auto;
+            top: 8px;
+            transform: none;
+            width: 28px;
+            height: 20px;
+            z-index: 1002;
+            cursor: pointer;
+            text-indent: -9999px;
+            border-top: 2px solid $color_primary;
+            margin-left: auto;
+            transition: all 0.3s ease;
+
+            .bars span {
+                display: none;
+            }
+
+            &::before,
+            &::after {
+                content: '';
+                position: absolute;
+                left: 0;
+                width: 100%;
+                height: 2px;
+                background: $color_primary;
+                transition: transform 0.3s ease;
+            }
+
+            &::before {
+                top: 7px;
+            }
+
+            &::after {
+                top: 16px;
+            }
+
+            &.active {
+                border-top-color: transparent;
+
+                &::before {
+                    top: 9px;
+                    transform: rotate(45deg);
+                }
+
+                &::after {
+                    top: 9px;
+                    transform: rotate(-45deg);
+                }
+            }
+        }
+
+        // ------------------ Off-canvas panel ------------------
+        // JS removes the plugin's inline style attribute, so plain
+        // display:flex now wins on specificity + load order.
+        >ul {
+            display: flex;
+            flex-direction: column;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+
+            // Glass panel, values from Figma:
+            // fill #FFFFFF33 (white 20%), background blur 20,
+            // drop shadow X0 Y3 Blur30 Spread0 #000000 15%
+            background: #FFFFFF33;
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            box-shadow: 0 3px 30px 0 rgba(#000000, 0.15);
+
+            align-items: flex-start;
+            gap: 0;
+            overflow-y: auto;
+            overflow-x: hidden;
+            padding: 0 0 80px 0;
+            margin: 0;
+            list-style: none;
+            z-index: 1000;
+            transform: translateX(-100%);
+            opacity: 0;
+            visibility: hidden;
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+                opacity 0.3s ease,
+                visibility 0.3s ease;
+            will-change: transform, opacity;
+            -webkit-overflow-scrolling: touch;
+
+            &.mobile-menu-open,
+            &.active {
+                transform: translateX(0);
+                opacity: 1;
+                visibility: visible;
+                animation: slideInLeft 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+            }
+
+            &.closing {
+                animation: slideOutLeft 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+            }
+
+            // ------------------ Items ------------------
+            >li {
+                width: 100%;
+                height: auto;
+                list-style: none;
+                border-bottom: 1px solid rgba($color_dark, 0.06);
+                opacity: 0;
+                transform: translateX(-20px);
+                transition: opacity 0.3s ease, transform 0.3s ease;
+                flex-shrink: 0;
+                position: relative;
+
+                @for $i from 1 through 10 {
+                    &:nth-child(#{$i}) {
+                        transition-delay: #{$i * 0.05}s;
+                    }
+                }
+
+                // Top-level link
+                >a {
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    padding: 22px 24px;
+                    font-family: $font_primary;
+                    font-size: 16px;
+                    font-weight: 600;
+                    letter-spacing: 0;
+                    line-height: 22px;
+                    height: auto;
+                    width: 100%;
+                    color: $color_navy;
+                    text-decoration: none;
+
+                    &:hover {
+                        color: $color_primary;
+                    }
+                }
+
+                // Our chevron on the link's ::after
+                &.has-sub>a::after {
+                    font-family: $fa_family;
+                    font-weight: 900;
+                    content: $fa_chevron_down;
+                    font-size: 14px;
+                    line-height: 1;
+                    color: $color_navy;
+                    opacity: 0.7;
+                    display: inline-block;
+                    flex-shrink: 0;
+                    margin-left: 10px;
+                    pointer-events: none;
+                    position: static;
+                    border: 0;
+                    width: auto;
+                    height: auto;
+                    background: none;
+                    transform: rotate(0deg);
+                    transition: transform 0.3s ease, color 0.2s ease, opacity 0.2s ease;
+                }
+
+                &.has-sub.open>a::after {
+                    color: $color_primary;
+                    opacity: 1;
+                    transform: rotate(180deg);
+                }
+
+                // Invisible click target (our own <button>, not the plugin's .dd-toggle)
+                >.submenu-toggle {
+                    display: block;
+                    position: absolute;
+                    top: 0;
+                    right: 0;
+                    width: 56px;
+                    height: 100%;
+                    z-index: 2;
+                }
+
+                // ------------------ Mobile submenu ------------------
+                >ul {
+                    display: block;
+                    visibility: hidden;
+                    opacity: 0;
+                    max-height: 0;
+                    transform: translateY(-8px);
+                    overflow: hidden;
+                    pointer-events: none;
+                    // relative + z-index lifts the submenu ABOVE the
+                    // .submenu-toggle button, which is height:100% of the
+                    // li and would otherwise cover the right 56px of every
+                    // submenu link once the submenu is open.
+                    position: relative;
+                    z-index: 3;
+                    box-shadow: none;
+                    border-top: none;
+                    border-left: 3px solid $color_primary;
+                    border-radius: 0;
+                    padding: 0;
+                    margin: 0;
+                    background: rgba($color_primary, 0.02);
+                    min-width: unset;
+                    width: 100%;
+                    list-style: none;
+                    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+
+                    &.open,
+                    &.active {
+                        visibility: visible;
+                        opacity: 1;
+                        max-height: 800px;
+                        transform: translateY(0);
+                        pointer-events: auto;
+                    }
+
+                    li {
+                        border-bottom: none;
+                        list-style: none;
+
+                        a {
+                            padding: 18px 24px;
+                            font-family: $font_primary;
+                            font-size: 16px;
+                            font-weight: 600;
+                            line-height: 24px;
+                            letter-spacing: 0;
+                            color: $color_navy;
+                            display: block;
+                            text-decoration: none;
+                            transition: color 0.2s ease, background 0.2s ease;
+
+                            &:hover {
+                                color: $color_primary;
+                            }
+                        }
+                    }
+                }
+
+                // ------------------ Injected logo row ------------------
+                &.mobile-menu-logo {
+                    display: flex;
+                    align-items: center;
+                    padding: 12px 0;
+
+                    a {
+                        display: block;
+                        line-height: 0;
+                        padding: 0;
+                        width: auto;
+                    }
+
+                    img {
+                        width: 220px;
+                        height: 50px;
+                        object-fit: contain;
+                    }
+                }
+
+                // ------------------ CTA row ------------------
+                &.mobile-menu-cta-item {
+                    display: block;
+                    order: 999;
+                    border-bottom: none;
+
+                    .btn--primary {
+                        display: flex;
+                        width: calc(100% - 32px);
+                        margin: 16px;
+                        justify-content: center;
+                        align-items: center;
+                        background: $color_primary;
+                        color: $color_white;
+                        font-family: $font_primary;
+                        font-size: 16px;
+                        font-weight: 600;
+                        letter-spacing: 0.10em;
+                        text-decoration: none;
+                        padding: 14px 22px;
+                        border-radius: 4px;
+                        border: none;
+                        cursor: pointer;
+                        transition: background 0.2s ease, color 0.2s ease;
+
+                        &:hover {
+                            color: $color_white;
+                        }
+
+                        &:active,
+                        &:focus {
+                            background: darken($color_primary, 14%);
+                            color: $color_white;
+                        }
+                    }
+                }
+            }
+
+            // Open state: fade every row in
+            &.mobile-menu-open>li,
+            &.active>li {
+                opacity: 1;
+                transform: translateX(0);
+            }
+
+            &.mobile-menu-open>li.mobile-menu-cta-item,
+            &.active>li.mobile-menu-cta-item {
+                transition-delay: 0.4s;
+            }
+        }
+    }
+
+    .mobile-menu-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        background: rgba(0, 0, 0, 0.2);
+        z-index: 997;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.3s ease, visibility 0.3s ease;
+
+        &.active {
+            opacity: 1;
+            visibility: visible;
+        }
+    }
+}
+
+// ============================================================
+// Small Tablet  (max-width: 768px)
+// Same selectors as the 991px block, later in the file,
+// so they win without !important.
+// ============================================================
+
+@media (max-width: 768px) {
+
+    .site-header__inner {
+        height: 64px;
+        gap: 10px;
+    }
+
+    .site-header.is-sticky .site-header__inner {
+        height: 56px;
+    }
+
+    .site-logo {
+        width: 190px;
+        height: 51px;
+
+        img {
+            width: 190px;
+            height: 51px;
+            object-fit: contain;
+        }
+    }
+
+    .site-header.is-sticky .site-logo {
+        width: 190px;
+        height: 51px;
+
+        img {
+            width: 190px;
+            height: 51px;
+        }
+    }
+
+    #{$nav}>ul>li>a {
+        font-size: 16px;
+        font-weight: 600;
+        padding: 20px 22px;
+    }
+
+    #{$nav}>ul>li>ul li a {
+        font-size: 14px;
+        font-weight: 600;
+        padding: 16px 22px;
+    }
+}
+
+// ============================================================
+// Small Mobile  (max-width: 480px)
+// ============================================================
+
+@media (max-width: 480px) {
+
+    .site-header .container {
+        padding: 0 $container-gutter;
+    }
+
+    .site-header__inner {
+        height: 60px;
+        gap: 8px;
+    }
+
+    .site-header.is-sticky .site-header__inner {
+        height: 52px;
+    }
+
+    .site-logo {
+        width: 165px;
+        height: 44px;
+
+        img {
+            width: 165px;
+            height: 44px;
+            object-fit: contain;
+        }
+    }
+
+    .site-header.is-sticky .site-logo {
+        width: 165px;
+        height: 44px;
+
+        img {
+            width: 165px;
+            height: 44px;
+        }
+    }
+
+    #{$nav}>ul {
+        padding-bottom: 60px;
+
+        >li>a {
+            font-size: 16px;
+            font-weight: 600;
+            padding: 20px;
+        }
+
+        >li>ul li a {
+            font-size: 14px;
+            font-weight: 600;
+            padding: 16px 20px;
+        }
+
+        >li.mobile-menu-logo {
+            padding: 10px 0;
+
+            img {
+                width: 165px;
+                height: 44px;
+            }
+
+            a {
+                padding: 0 10px;
+            }
+        }
+
+        >li.mobile-menu-cta-item .btn--primary {
+            font-size: 14px;
+            font-weight: 600;
+            padding: 12px 18px;
+            margin: 12px 14px;
+            width: calc(100% - 28px);
+        }
+    }
+}
+
+// ============================================================
+// Extra Small Mobile  (max-width: 380px)
+// ============================================================
+
+@media (max-width: 380px) {
+
+    .site-header__inner {
+        height: 54px;
+        gap: 6px;
+    }
+
+    .site-header.is-sticky .site-header__inner {
+        height: 46px;
+    }
+
+    .site-logo {
+        width: 140px;
+        height: 38px;
+
+        img {
+            width: 140px;
+            height: 38px;
+            object-fit: contain;
+        }
+    }
+
+    .site-header.is-sticky .site-logo {
+        width: 140px;
+        height: 38px;
+
+        img {
+            width: 140px;
+            height: 38px;
+        }
+    }
+
+    #{$nav}>ul>li.mobile-menu-logo img {
+        width: 140px;
+        height: 38px;
+    }
+}
+
+// ============================================================
+// Animations
+// ============================================================
+
+@keyframes slideInLeft {
+    from {
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideOutLeft {
+    from {
+        transform: translateX(0);
+        opacity: 1;
+    }
+
+    to {
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+    }
+
+    to {
+        opacity: 0;
+    }
+}
+
+body.menu-open {
+    overflow: hidden;
+    position: fixed;
+    width: 100%;
+
+    @media (min-width: ($sn_breakpoint + 1)) {
+        overflow: auto;
+        position: static;
+        width: auto;
+    }
+}
+
+.brand-slider {
+    @media (max-width: 1024px) {
+        .elementor-swiper-button-prev {
+            left: 33px;
+        }
+
+        .elementor-swiper-button-next {
+            right: 33px;
+        }
+    }
+
+    @media (max-width: 767px) {
+        .elementor-swiper-button-prev {
+            left: 20px;
+        }
+
+        .elementor-swiper-button-next {
+            right: 20px;
+        }
+    }
+}
